@@ -1,0 +1,17 @@
+function create(safe)
+   pcall(function() if (safe.Ahh.Enabled == true) then safe.Ahh:Destroy() end end)
+   local x = Instance.new('BillboardGui',safe)
+   x.Name = "Ahh"
+   x.AlwaysOnTop = true
+   x.Size = UDim2.new(1.2,0,1.2,0)
+   local b = Instance.new('Frame',x)
+   b.Size = UDim2.new(1.2,0,1.2,0)
+   x.Adornee = safe
+   if safe.Values.Broken.Value ~= false then b.BackgroundColor3 = Color3.new(255,0,0) else b.BackgroundColor3 = Color3.new(0,255,0) end
+end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+   for i,v in pairs(game:GetService("Workspace").Map.BredMakurz:GetChildren()) do
+       create(v)
+   end
+end)

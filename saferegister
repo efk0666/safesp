@@ -1,3 +1,5 @@
+print("open)
+
 function create(safe)
    pcall(function() if (safe.Ahh.Enabled == true) then safe.Ahh:Destroy() end end)
    local x = Instance.new('BillboardGui',safe)

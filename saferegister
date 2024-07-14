@@ -1,18 +1,47 @@
+local ToggleKey = Enum.KeyCode.T  -- Define the toggle key
 
-function create(safe)
-   pcall(function() if (safe.Ahh.Enabled == true) then safe.Ahh:Destroy() end end)
-   local x = Instance.new('BillboardGui',safe)
-   x.Name = "Ahh"
-   x.AlwaysOnTop = true
-   x.Size = UDim2.new(1.2,0,1.2,0)
-   local b = Instance.new('Frame',x)
-   b.Size = UDim2.new(1.2,0,1.2,0)
-   x.Adornee = safe
-   if safe.Values.Broken.Value ~= false then b.BackgroundColor3 = Color3.new(255,0,0) else b.BackgroundColor3 = Color3.new(0,255,0) end
+local enabled = false  -- Initial state: script is disabled
+
+local function create(safe)
+    pcall(function()
+        if (safe:FindFirstChild("Ahh") and safe.Ahh.Enabled == true) then
+            safe.Ahh:Destroy()
+        end
+    end)
+    
+    if not enabled then
+        return  -- Exit function if script is disabled
+    end
+    
+    local x = Instance.new('BillboardGui', safe)
+    x.Name = "Ahh"
+    x.AlwaysOnTop = true
+    x.Size = UDim2.new(1.2, 0, 1.2, 0)
+    
+    local b = Instance.new('Frame', x)
+    b.Size = UDim2.new(1.2, 0, 1.2, 0)
+    x.Adornee = safe
+    
+    if safe.Values.Broken.Value ~= false then
+        b.BackgroundColor3 = Color3.new(255, 0, 0)
+    else
+        b.BackgroundColor3 = Color3.new(0, 255, 0)
+    end
 end
 
+game:GetService("UserInputService").InputBegan:Connect(function(input, isProcessed)
+    if not isProcessed and input.KeyCode == ToggleKey then
+        enabled = not enabled
+        if enabled then
+            print("Script enabled with key 'T'")
+        else
+            print("Script disabled with key 'T'")
+        end
+    end
+end)
+
 game:GetService("RunService").Heartbeat:Connect(function()
-   for i,v in pairs(game:GetService("Workspace").Map.BredMakurz:GetChildren()) do
-       create(v)
-   end
+    for i, v in pairs(game:GetService("Workspace").Map.BredMakurz:GetChildren()) do
+        create(v)
+    end
 end)

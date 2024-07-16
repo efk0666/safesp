@@ -1,4 +1,4 @@
-local ToggleKey = Enum.KeyCode.T  -- Define the toggle key
+local ToggleKey = Enum.KeyCode.Y  -- Define the toggle key
 
 local enabled = false  -- Initial state: script is disabled
 

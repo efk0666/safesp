@@ -1,6 +1,6 @@
-local ToggleKey = Enum.KeyCode.Y  -- Define the toggle key
+local ToggleKey = Enum.KeyCode.Y
 
-local enabled = false  -- Initial state: script is disabled
+local enabled = false
 
 local function create(safe)
     pcall(function()
